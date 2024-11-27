@@ -327,6 +327,34 @@ static const ModelEntry modelTable[] = {
     .keyTable = &KEY_TABLE_DEFINITION(esytime)
   },
 
+  { .modelIdentifier = EU_BNOTE,
+    .modelName = "B.Note",
+    .cellCount = 40,
+    .hasBrailleKeyboard = 1,
+    .keyTable = &KEY_TABLE_DEFINITION(esytime)
+  },
+
+  { .modelIdentifier = EU_BNOTE2,
+    .modelName = "B.Note 2",
+    .cellCount = 40,
+    .hasBrailleKeyboard = 1,
+    .keyTable = &KEY_TABLE_DEFINITION(esytime)
+  },
+
+  { .modelIdentifier = EU_BBOOK,
+    .modelName = "B.Book",
+    .cellCount = 40,
+    .hasBrailleKeyboard = 1,
+    .keyTable = &KEY_TABLE_DEFINITION(esytime)
+  },
+
+  { .modelIdentifier = EU_BBOOK2,
+    .modelName = "B.Book 2",
+    .cellCount = 40,
+    .hasBrailleKeyboard = 1,
+    .keyTable = &KEY_TABLE_DEFINITION(esytime)
+  },
+
   { .modelName = NULL }
 };
 
@@ -825,7 +853,7 @@ initializeDevice (BrailleDisplay *brl) {
       if (writePacket(brl, packet, sizeof(packet)) == -1) return 0;
     }
 
-    while (io->awaitInput(brl, 500)) {
+    while (io->awaitInput(brl, 1000)) {
       if (readCommand(brl, KTB_CTX_DEFAULT) == BRL_CMD_RESTARTBRL) return 0;
 
       if (haveSystemInformation) {
