@@ -343,14 +343,14 @@ static const ModelEntry modelTable[] = {
 
   { .modelIdentifier = EU_BBOOK,
     .modelName = "B.Book",
-    .cellCount = 40,
+    .cellCount = 32,
     .hasBrailleKeyboard = 1,
     .keyTable = &KEY_TABLE_DEFINITION(esytime)
   },
 
   { .modelIdentifier = EU_BBOOK2,
     .modelName = "B.Book 2",
-    .cellCount = 40,
+    .cellCount = 32,
     .hasBrailleKeyboard = 1,
     .keyTable = &KEY_TABLE_DEFINITION(esytime)
   },
@@ -498,18 +498,31 @@ getModelEntry (unsigned char identifier) {
 
 static int
 handleSystemInformation (BrailleDisplay *brl, unsigned char *packet) {
-  int logLevel = LOG_INFO;
-  const char *infoDescription;
-  enum {Unknown, End, String, Dec8, Dec16, Hex32} infoType;
+  int logLevel = LOG_CATEGORY(BRAILLE_DRIVER);
+  const char *logLabel = "Esysiris";
+
+  const char *infoLabel = NULL;
+  enum {Unknown, End, String, Dec8, Dec16, Hex32, Clock} infoType = Unknown;
 
   switch(packet[0]) {
-    case LP_SYSTEM_SHORTNAME: 
+    case LP_SYSTEM_NAME: 
       infoType = String;
-      infoDescription = "Short Name";
+      infoLabel = "Long Name";
       break;
 
-    case LP_SYSTEM_IDENTITY: 
-      infoType = End;
+    case LP_SYSTEM_SHORTNAME: 
+      infoType = String;
+      infoLabel = "Short Name";
+      break;
+
+    case LP_SYSTEM_SERIAL: 
+      infoType = String;
+      infoLabel = "Serial Number";
+      break;
+
+    case LP_SYSTEM_LANGUAGE: 
+      infoType = String;
+      infoLabel = "Language Code";
       break;
 
     case LP_SYSTEM_DISPLAY_LENGTH: 
@@ -517,52 +530,7 @@ handleSystemInformation (BrailleDisplay *brl, unsigned char *packet) {
       brl->textColumns = packet[1];
 
       infoType = Dec8;
-      infoDescription = "Cell Count";
-      break;
-
-    case LP_SYSTEM_LANGUAGE: 
-      infoType = String;
-      infoDescription = "Country Code";
-      break;
-
-    case LP_SYSTEM_FRAME_LENGTH: 
-      maximumFrameLength = (packet[1] << 8)
-                         | (packet[2] << 0)
-                         ;
-
-      infoType = Dec16;
-      infoDescription = "Maximum Frame Length";
-      break;
-
-    case LP_SYSTEM_NAME: 
-      infoType = String;
-      infoDescription = "Long Name";
-      break;
-
-    case LP_SYSTEM_OPTION: 
-      deviceOptions = (packet[1] << 24)
-                    | (packet[2] << 16)
-                    | (packet[3] <<  8)
-                    | (packet[4] <<  0)
-                    ;
-
-      infoType = Hex32;
-      infoDescription = "Device Options";
-      break;
-
-    case LP_SYSTEM_PROTOCOL: 
-      protocolVersion = ((packet[1] - '0') << 16)
-                      | ((packet[3] - '0') <<  8)
-                      | ((packet[4] - '0') <<  0)
-                      ;
-
-      infoType = String;
-      infoDescription = "Protocol Version";
-      break;
-
-    case LP_SYSTEM_SERIAL: 
-      infoType = String;
-      infoDescription = "Serial Number";
+      infoLabel = "Cell Count";
       break;
 
     case LP_SYSTEM_TYPE:
@@ -575,7 +543,23 @@ handleSystemInformation (BrailleDisplay *brl, unsigned char *packet) {
       }
 
       infoType = Dec8;
-      infoDescription = "Model Identifier";
+      infoLabel = "Model Identifier";
+      break;
+
+    case LP_SYSTEM_SUBTYPE: 
+      infoType = Dec8;
+      infoLabel = "Model Type";
+      break;
+
+    case LP_SYSTEM_OPTION: 
+      deviceOptions = (packet[1] << 24)
+                    | (packet[2] << 16)
+                    | (packet[3] <<  8)
+                    | (packet[4] <<  0)
+                    ;
+
+      infoType = Hex32;
+      infoLabel = "Device Options";
       break;
 
     case LP_SYSTEM_SOFTWARE: 
@@ -585,7 +569,40 @@ handleSystemInformation (BrailleDisplay *brl, unsigned char *packet) {
                       ;
 
       infoType = String;
-      infoDescription = "Firmware Version";
+      infoLabel = "Firmware Version";
+      break;
+
+    case LP_SYSTEM_PROTOCOL: 
+      protocolVersion = ((packet[1] - '0') << 16)
+                      | ((packet[3] - '0') <<  8)
+                      | ((packet[4] - '0') <<  0)
+                      ;
+
+      infoType = String;
+      infoLabel = "Protocol Version";
+      break;
+
+    case LP_SYSTEM_FRAME_LENGTH: 
+      maximumFrameLength = (packet[1] << 8)
+                         | (packet[2] << 0)
+                         ;
+
+      infoType = Dec16;
+      infoLabel = "Maximum Frame Length";
+      break;
+
+    case LP_SYSTEM_DATE_AND_TIME: 
+      infoType = Clock;
+      infoLabel = "Clock";
+      break;
+
+    case LP_SYSTEM_BATTERY: 
+      infoType = String;
+      infoLabel = "Battery State";
+      break;
+
+    case LP_SYSTEM_IDENTITY: 
+      infoType = End;
       break;
 
     default:
@@ -595,32 +612,48 @@ handleSystemInformation (BrailleDisplay *brl, unsigned char *packet) {
 
   switch (infoType) {
     case Unknown:
-      logMessage(LOG_WARNING, "unknown Esysiris system information subcode: 0X%02X", packet[0]);
+      logMessage(LOG_WARNING, "unknown %s system information subcode: 0X%02X", logLabel, packet[0]);
       break;
 
     case End:
-      logMessage(LOG_DEBUG, "end of Esysiris system information");
+      logMessage(logLevel, "%s End of System Information", logLabel);
       return 1;
 
-    case String:
-      logMessage(logLevel, "Esysiris %s: %s", infoDescription, &packet[1]);
+    case String: {
+      const unsigned char *string = &packet[1];
+      const unsigned char *end = string;
+
+      while (*end) {;
+        if (*end == ASCII_ETX) break;
+        end += 1;
+      }
+
+      logMessage(logLevel, "%s %s: %.*s", logLabel, infoLabel, (int)(end - string), string);
       break;
+    }
 
     case Dec8:
-      logMessage(logLevel, "Esysiris %s: %u", infoDescription, packet[1]);
+      logMessage(logLevel, "%s %s: %u", logLabel, infoLabel, packet[1]);
       break;
 
     case Dec16:
-      logMessage(logLevel, "Esysiris %s: %u", infoDescription, (packet[1] << 8) | packet[2]);
+      logMessage(logLevel, "%s %s: %u", logLabel, infoLabel, (packet[1] << 8) | packet[2]);
       break;
 
     case Hex32:
-      logMessage(logLevel, "Esysiris %s: 0X%02X%02X%02X%02X",
-                 infoDescription, packet[1], packet[2], packet[3], packet[4]);
+      logMessage(logLevel, "%s %s: 0X%02X%02X%02X%02X",
+                 logLabel, infoLabel, packet[1], packet[2], packet[3], packet[4]);
+      break;
+
+    case Clock:
+      logMessage(logLevel, "%s %s: %04u-%02u-%02uT%02u:%02u:%02u",
+                 logLabel, infoLabel,
+                 packet[1]+1792, packet[2], packet[3]+1,
+                 packet[4], packet[5], packet[6]);
       break;
 
     default:
-      logMessage(LOG_WARNING, "unimplemented Esysiris system information subcode type: 0X%02X", infoType);
+      logMessage(LOG_WARNING, "unimplemented %s system information subcode type: 0X%02X", logLabel, infoType);
       break;
   }
 
