@@ -1,0 +1,74 @@
+###############################################################################
+# BRLTTY - A background process providing access to the console screen (when in
+#          text mode) for a blind person using a refreshable braille display.
+#
+# Copyright (C) 1995-2024 by The BRLTTY Developers.
+#
+# BRLTTY comes with ABSOLUTELY NO WARRANTY.
+#
+# This is free software, placed under the terms of the
+# GNU Lesser General Public License, as published by the Free Software
+# Foundation; either version 2.1 of the License, or (at your option) any
+# later version. Please see the file LICENSE-LGPL for details.
+#
+# Web Page: http://brltty.app/
+#
+# This software is maintained by Dave Mielke <dave@mielke.cc>.
+###############################################################################
+
+title EuroBraille B.Note, B.Book
+
+include common.kti
+
+note The four round keys to the left and right of the braille cells are the left and right four-way joysticks.
+note Some keys have been reserved for internal use:
+note + LeftJoystickUp: go to the internal menu
+note + LeftJoystickPress: not available
+note + RightJoystickPress: not available
+
+bind LeftJoystickLeft FWINLTSKIP:HELP
+bind LeftJoystickRight FWINRTSKIP:PREFMENU
+bind LeftJoystickUp NOOP # go to the internal menu
+bind LeftJoystickDown CSRTRK:INFO
+
+bind RightJoystickLeft FWINLT:LNBEG
+bind RightJoystickRight FWINRT:LNEND
+bind RightJoystickUp LNUP:TOP
+bind RightJoystickDown LNDN:BOT
+
+bind LeftJoystickLeft+LeftJoystickRight BACK
+bind LeftJoystickUp+LeftJoystickDown CSRJMP_VERT
+
+bind RightJoystickLeft+RightJoystickRight HOME
+bind RightJoystickUp+RightJoystickDown PASTE:PASTE_ALTMODE
+
+bind LeftJoystickLeft+RightJoystickLeft PRPROMPT
+bind LeftJoystickLeft+RightJoystickRight PRPGRPH
+bind LeftJoystickLeft+RightJoystickUp PRDIFLN
+bind LeftJoystickLeft+RightJoystickDown ATTRUP
+
+bind LeftJoystickRight+RightJoystickLeft NXPROMPT
+bind LeftJoystickRight+RightJoystickRight NXPGRPH
+bind LeftJoystickRight+RightJoystickUp NXDIFLN
+bind LeftJoystickRight+RightJoystickDown ATTRDN
+
+bind LeftJoystickDown+RightJoystickLeft CSRVIS
+bind LeftJoystickDown+RightJoystickRight ATTRVIS
+bind LeftJoystickDown+RightJoystickUp SIXDOTS+on
+bind LeftJoystickDown+RightJoystickDown SIXDOTS+off
+
+bind LeftJoystickLeft+RoutingKey1 PRDIFCHAR
+bind LeftJoystickRight+RoutingKey1 NXDIFCHAR
+bind LeftJoystickUp+RoutingKey1 PRINDENT
+bind LeftJoystickDown+RoutingKey1 NXINDENT
+
+bind RightJoystickLeft+RoutingKey1 CLIP_NEW
+bind RightJoystickUp+RoutingKey1 CLIP_ADD
+bind RightJoystickRight+RoutingKey1 COPY_LINE
+bind RightJoystickDown+RoutingKey1 COPY_RECT
+
+context menu
+bind RightJoystickUp MENU_PREV_ITEM
+bind RightJoystickDown MENU_NEXT_ITEM
+bind RightJoystickLeft MENU_PREV_SETTING
+bind RightJoystickRight MENU_NEXT_SETTING

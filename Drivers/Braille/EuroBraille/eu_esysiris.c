@@ -168,11 +168,19 @@ BEGIN_KEY_NAME_TABLES(esytime)
   KEY_NAME_TABLE(routing),
 END_KEY_NAME_TABLES
 
+BEGIN_KEY_NAME_TABLES(bnote)
+  KEY_NAME_TABLE(joystick1),
+  KEY_NAME_TABLE(joystick2),
+  KEY_NAME_TABLE(keyboard),   // For braille keyboard when not in usb-hid mode.
+  KEY_NAME_TABLE(routing),
+END_KEY_NAME_TABLES
+
 PUBLIC_KEY_TABLE(iris)
 PUBLIC_KEY_TABLE(esys_small)
 PUBLIC_KEY_TABLE(esys_medium)
 PUBLIC_KEY_TABLE(esys_large)
 PUBLIC_KEY_TABLE(esytime)
+PUBLIC_KEY_TABLE(bnote)
 
 typedef struct {
   const char *modelName;
@@ -331,28 +339,28 @@ static const ModelEntry modelTable[] = {
     .modelName = "B.Note",
     .cellCount = 40,
     .hasBrailleKeyboard = 1,
-    .keyTable = &KEY_TABLE_DEFINITION(esytime)
+    .keyTable = &KEY_TABLE_DEFINITION(bnote)
   },
 
   { .modelIdentifier = EU_BNOTE2,
     .modelName = "B.Note 2",
     .cellCount = 40,
     .hasBrailleKeyboard = 1,
-    .keyTable = &KEY_TABLE_DEFINITION(esytime)
+    .keyTable = &KEY_TABLE_DEFINITION(bnote)
   },
 
   { .modelIdentifier = EU_BBOOK,
     .modelName = "B.Book",
     .cellCount = 32,
     .hasBrailleKeyboard = 1,
-    .keyTable = &KEY_TABLE_DEFINITION(esytime)
+    .keyTable = &KEY_TABLE_DEFINITION(bnote)
   },
 
   { .modelIdentifier = EU_BBOOK2,
     .modelName = "B.Book 2",
     .cellCount = 32,
     .hasBrailleKeyboard = 1,
-    .keyTable = &KEY_TABLE_DEFINITION(esytime)
+    .keyTable = &KEY_TABLE_DEFINITION(bnote)
   },
 
   { .modelName = NULL }

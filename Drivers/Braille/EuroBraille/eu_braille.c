@@ -51,6 +51,7 @@ BEGIN_KEY_TABLE_LIST
   &KEY_TABLE_DEFINITION(esys_medium),
   &KEY_TABLE_DEFINITION(esys_large),
   &KEY_TABLE_DEFINITION(esytime),
+  &KEY_TABLE_DEFINITION(bnote),
 END_KEY_TABLE_LIST
 
 const InputOutputOperations *io = NULL;
