@@ -728,7 +728,7 @@ rm -fr "${RPM_BUILD_ROOT}"
 
 
 %changelog
-* Tue Oct 15 2025 Dave Mielke <Dave@Mielke.cc> 6.8
+* Tue Jul 8 2025 Dave Mielke <Dave@Mielke.cc> 6.8
 General changes:
    The --helpers-directory (-H) command line option has been added.
    The Learn Mode prompt now includes the number of seconds before it times out.
