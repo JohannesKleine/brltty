@@ -36,8 +36,20 @@ bind RightJoystickRight FWINRT:LNEND
 bind RightJoystickUp LNUP:TOP
 bind RightJoystickDown LNDN:BOT
 
+bind LeftJoystickUp+LeftJoystickLeft CHRLT
+bind LeftJoystickUp+LeftJoystickRight CHRRT
+
+bind LeftJoystickDown+LeftJoystickLeft HWINLT
+bind LeftJoystickDown+LeftJoystickRight HWINRT
+
 bind LeftJoystickLeft+LeftJoystickRight BACK
 bind LeftJoystickUp+LeftJoystickDown CSRJMP_VERT
+
+bind RightJoystickLeft+RightJoystickUp TOP_LEFT
+bind RightJoystickLeft+RightJoystickDown BOT_LEFT
+
+bind RightJoystickRight+RightJoystickUp PRSEARCH
+bind RightJoystickRight+RightJoystickDown NXSEARCH
 
 bind RightJoystickLeft+RightJoystickRight HOME
 bind RightJoystickUp+RightJoystickDown PASTE:PASTE_ALTMODE
@@ -68,7 +80,7 @@ bind RightJoystickRight+RoutingKey1 COPY_LINE
 bind RightJoystickDown+RoutingKey1 COPY_RECT
 
 context menu
-bind RightJoystickUp MENU_PREV_ITEM
-bind RightJoystickDown MENU_NEXT_ITEM
+bind RightJoystickUp MENU_PREV_ITEM:MENU_FIRST_ITEM
+bind RightJoystickDown MENU_NEXT_ITEM:MENU_LAST_ITEM
 bind RightJoystickLeft MENU_PREV_SETTING
 bind RightJoystickRight MENU_NEXT_SETTING
