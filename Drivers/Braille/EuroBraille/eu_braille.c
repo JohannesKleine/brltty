@@ -110,7 +110,7 @@ static const InputOutputOperations serialOperations_clio = {
 };
 
 static const InputOutputOperations usbOperations_esys = {
-  .name = "Esys USB",
+  .name = "EsysIris (USB)",
   .protocol = &esysirisProtocolOperations,
   .awaitInput = awaitInput_generic,
   .readByte = readByte_generic,
@@ -118,7 +118,7 @@ static const InputOutputOperations usbOperations_esys = {
 };
 
 static const InputOutputOperations serialOperations_esys = {
-  .name = "Esys Serial",
+  .name = "EsysIris (serial)",
   .protocol = &esysirisProtocolOperations,
   .awaitInput = awaitInput_generic,
   .readByte = readByte_generic,

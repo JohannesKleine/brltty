@@ -507,7 +507,7 @@ getModelEntry (unsigned char identifier) {
 static int
 handleSystemInformation (BrailleDisplay *brl, unsigned char *packet) {
   int logLevel = LOG_CATEGORY(BRAILLE_DRIVER);
-  const char *logLabel = "Esysiris";
+  const char *logLabel = "EsysIris";
 
   const char *infoLabel = NULL;
   enum {Unknown, End, String, Dec8, Dec16, Hex32, Clock} infoType = Unknown;
