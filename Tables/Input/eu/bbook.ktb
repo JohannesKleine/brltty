@@ -16,7 +16,7 @@
 # This software is maintained by Dave Mielke <dave@mielke.cc>.
 ###############################################################################
 
-title EuroBraille B.Note
+title EuroBraille B.Book
 
 include common.kti
 include keypads.kti

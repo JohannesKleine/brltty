@@ -102,6 +102,20 @@ BEGIN_KEY_NAME_TABLE(joystick2)
   COMMAND_KEY_ENTRY(RightJoystickPress, "RightJoystickPress"),
 END_KEY_NAME_TABLE
 
+BEGIN_KEY_NAME_TABLE(keypad1)
+  COMMAND_KEY_ENTRY(LeftJoystickLeft, "LeftKeypadLeft"),
+  COMMAND_KEY_ENTRY(LeftJoystickRight, "LeftKeypadRight"),
+  COMMAND_KEY_ENTRY(LeftJoystickUp, "LeftKeypadUp"),
+  COMMAND_KEY_ENTRY(LeftJoystickDown, "LeftKeypadDown"),
+END_KEY_NAME_TABLE
+
+BEGIN_KEY_NAME_TABLE(keypad2)
+  COMMAND_KEY_ENTRY(RightJoystickLeft, "RightKeypadLeft"),
+  COMMAND_KEY_ENTRY(RightJoystickRight, "RightKeypadRight"),
+  COMMAND_KEY_ENTRY(RightJoystickUp, "RightKeypadUp"),
+  COMMAND_KEY_ENTRY(RightJoystickDown, "RightKeypadDown"),
+END_KEY_NAME_TABLE
+
 BEGIN_KEY_NAME_TABLE(keyboard)
   BRAILLE_KEY_ENTRY(Dot1, "Dot1"),
   BRAILLE_KEY_ENTRY(Dot2, "Dot2"),
@@ -169,8 +183,15 @@ BEGIN_KEY_NAME_TABLES(esytime)
 END_KEY_NAME_TABLES
 
 BEGIN_KEY_NAME_TABLES(bnote)
-  KEY_NAME_TABLE(joystick1),
-  KEY_NAME_TABLE(joystick2),
+  KEY_NAME_TABLE(keypad1),
+  KEY_NAME_TABLE(keypad2),
+  KEY_NAME_TABLE(keyboard),   // For braille keyboard when not in usb-hid mode.
+  KEY_NAME_TABLE(routing),
+END_KEY_NAME_TABLES
+
+BEGIN_KEY_NAME_TABLES(bbook)
+  KEY_NAME_TABLE(keypad1),
+  KEY_NAME_TABLE(keypad2),
   KEY_NAME_TABLE(keyboard),   // For braille keyboard when not in usb-hid mode.
   KEY_NAME_TABLE(routing),
 END_KEY_NAME_TABLES
@@ -181,6 +202,7 @@ PUBLIC_KEY_TABLE(esys_medium)
 PUBLIC_KEY_TABLE(esys_large)
 PUBLIC_KEY_TABLE(esytime)
 PUBLIC_KEY_TABLE(bnote)
+PUBLIC_KEY_TABLE(bbook)
 
 typedef struct {
   const char *modelName;
@@ -344,7 +366,7 @@ static const ModelEntry modelTable[] = {
 
   { .modelIdentifier = EU_BNOTE2,
     .modelName = "B.Note 2",
-    .cellCount = 40,
+    .cellCount = 20,
     .hasBrailleKeyboard = 1,
     .keyTable = &KEY_TABLE_DEFINITION(bnote)
   },
@@ -353,14 +375,14 @@ static const ModelEntry modelTable[] = {
     .modelName = "B.Book",
     .cellCount = 32,
     .hasBrailleKeyboard = 1,
-    .keyTable = &KEY_TABLE_DEFINITION(bnote)
+    .keyTable = &KEY_TABLE_DEFINITION(bbook)
   },
 
   { .modelIdentifier = EU_BBOOK2,
     .modelName = "B.Book 2",
     .cellCount = 32,
     .hasBrailleKeyboard = 1,
-    .keyTable = &KEY_TABLE_DEFINITION(bnote)
+    .keyTable = &KEY_TABLE_DEFINITION(bbook)
   },
 
   { .modelName = NULL }
