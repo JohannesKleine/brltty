@@ -85,3 +85,7 @@ bind RightKeypadUp MENU_PREV_ITEM:MENU_FIRST_ITEM
 bind RightKeypadDown MENU_NEXT_ITEM:MENU_LAST_ITEM
 bind RightKeypadLeft MENU_PREV_SETTING
 bind RightKeypadRight MENU_NEXT_SETTING
+bind RightKeypadUp+RightKeypadLeft PREFLOAD
+bind RightKeypadUp+RightKeypadRight PREFSAVE
+bind RightKeypadDown+RightKeypadLeft MENU_PREV_LEVEL
+bind RightKeypadDown+RightKeypadRight PREFMENU
