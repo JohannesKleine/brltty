@@ -30,14 +30,14 @@ bind RightKeypadRight FWINRT:LNEND
 bind RightKeypadUp LNUP:TOP
 bind RightKeypadDown LNDN:BOT
 
-bind LeftKeypadUp+LeftKeypadLeft CHRLT
-bind LeftKeypadUp+LeftKeypadRight CHRRT
+bind LeftKeypadLeft+LeftKeypadUp CHRLT
+bind LeftKeypadRight+LeftKeypadUp CHRRT
 
-bind LeftKeypadDown+LeftKeypadLeft HWINLT
-bind LeftKeypadDown+LeftKeypadRight HWINRT
+bind LeftKeypadLeft+LeftKeypadDown HWINLT
+bind LeftKeypadRight+LeftKeypadDown HWINRT
 
 bind LeftKeypadLeft+LeftKeypadRight BACK
-bind LeftKeypadUp+LeftKeypadDown CSRJMP_VERT
+bind LeftKeypadDown+LeftKeypadUp CSRJMP_VERT
 
 bind RightKeypadLeft+RightKeypadUp TOP_LEFT
 bind RightKeypadLeft+RightKeypadDown BOT_LEFT
@@ -63,15 +63,22 @@ bind LeftKeypadDown+RightKeypadRight ATTRVIS
 bind LeftKeypadDown+RightKeypadUp SIXDOTS+on
 bind LeftKeypadDown+RightKeypadDown SIXDOTS+off
 
-bind LeftKeypadLeft+RoutingKey1 PRDIFCHAR
-bind LeftKeypadRight+RoutingKey1 NXDIFCHAR
-bind LeftKeypadUp+RoutingKey1 PRINDENT
-bind LeftKeypadDown+RoutingKey1 NXINDENT
+bind LeftKeypadLeft+RoutingKey1 SETLEFT
+bind LeftKeypadRight+RoutingKey1 DESCCHAR
+bind LeftKeypadDown+RoutingKey1 SWITCHVT
+bind LeftKeypadDown+LeftKeypadLeft+RoutingKey1 SETMARK
+bind LeftKeypadDown+LeftKeypadRight+RoutingKey1 GOTOMARK
 
 bind RightKeypadLeft+RoutingKey1 CLIP_NEW
 bind RightKeypadUp+RoutingKey1 CLIP_ADD
 bind RightKeypadRight+RoutingKey1 COPY_LINE
 bind RightKeypadDown+RoutingKey1 COPY_RECT
+
+bind RightKeypadLeft+RightKeypadUp+RoutingKey1 PRINDENT
+bind RightKeypadLeft+RightKeypadDown+RoutingKey1 NXINDENT
+
+bind RightKeypadRight+RightKeypadUp+RoutingKey1 PRDIFCHAR
+bind RightKeypadRight+RightKeypadDown+RoutingKey1 NXDIFCHAR
 
 context menu
 bind RightKeypadUp MENU_PREV_ITEM:MENU_FIRST_ITEM
