@@ -844,6 +844,24 @@ handleKeyEvent (BrailleDisplay *brl, unsigned char *packet) {
       return 1;
     }
 
+    case LP_KEY_USB_HID_MODE: {
+      const char *mode = NULL;
+
+      switch (packet[1]) {
+        case '0':
+          mode = "protocol";
+          break;
+
+        case '1':
+          mode = "HID";
+          break;
+      }
+
+      if (!mode) break;
+      logMessage(LOG_CATEGORY(BRAILLE_DRIVER), "keyboard mode: %s", mode);
+      return 1;
+    }
+
     case LP_KEY_PC: {
       int command = makeKeyboardCommand(brl, packet);
 
