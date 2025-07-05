@@ -49,6 +49,17 @@ BEGIN_KEY_NAME_TABLE(linear)
   COMMAND_KEY_ENTRY(L8, "L8"),
 END_KEY_NAME_TABLE
 
+BEGIN_KEY_NAME_TABLE(navctl)
+  COMMAND_KEY_ENTRY(L1, "Backward"),
+  COMMAND_KEY_ENTRY(L2, "C1"),
+  COMMAND_KEY_ENTRY(L3, "C2"),
+  COMMAND_KEY_ENTRY(L4, "C3"),
+  COMMAND_KEY_ENTRY(L5, "C4"),
+  COMMAND_KEY_ENTRY(L6, "C5"),
+  COMMAND_KEY_ENTRY(L7, "C6"),
+  COMMAND_KEY_ENTRY(L8, "Forward"),
+END_KEY_NAME_TABLE
+
 BEGIN_KEY_NAME_TABLE(arrow)
   COMMAND_KEY_ENTRY(Left, "Left"),
   COMMAND_KEY_ENTRY(Right, "Right"),
@@ -86,15 +97,13 @@ BEGIN_KEY_NAME_TABLE(switch6)
   COMMAND_KEY_ENTRY(Switch6Right, "Switch6Right"),
 END_KEY_NAME_TABLE
 
-BEGIN_KEY_NAME_TABLE(joystick1)
+BEGIN_KEY_NAME_TABLE(joysticks)
   COMMAND_KEY_ENTRY(LeftJoystickLeft, "LeftJoystickLeft"),
   COMMAND_KEY_ENTRY(LeftJoystickRight, "LeftJoystickRight"),
   COMMAND_KEY_ENTRY(LeftJoystickUp, "LeftJoystickUp"),
   COMMAND_KEY_ENTRY(LeftJoystickDown, "LeftJoystickDown"),
   COMMAND_KEY_ENTRY(LeftJoystickPress, "LeftJoystickPress"),
-END_KEY_NAME_TABLE
 
-BEGIN_KEY_NAME_TABLE(joystick2)
   COMMAND_KEY_ENTRY(RightJoystickLeft, "RightJoystickLeft"),
   COMMAND_KEY_ENTRY(RightJoystickRight, "RightJoystickRight"),
   COMMAND_KEY_ENTRY(RightJoystickUp, "RightJoystickUp"),
@@ -102,14 +111,12 @@ BEGIN_KEY_NAME_TABLE(joystick2)
   COMMAND_KEY_ENTRY(RightJoystickPress, "RightJoystickPress"),
 END_KEY_NAME_TABLE
 
-BEGIN_KEY_NAME_TABLE(keypad1)
+BEGIN_KEY_NAME_TABLE(keypads)
   COMMAND_KEY_ENTRY(LeftJoystickLeft, "LeftKeypadLeft"),
   COMMAND_KEY_ENTRY(LeftJoystickRight, "LeftKeypadRight"),
   COMMAND_KEY_ENTRY(LeftJoystickUp, "LeftKeypadUp"),
   COMMAND_KEY_ENTRY(LeftJoystickDown, "LeftKeypadDown"),
-END_KEY_NAME_TABLE
 
-BEGIN_KEY_NAME_TABLE(keypad2)
   COMMAND_KEY_ENTRY(RightJoystickLeft, "RightKeypadLeft"),
   COMMAND_KEY_ENTRY(RightJoystickRight, "RightKeypadRight"),
   COMMAND_KEY_ENTRY(RightJoystickUp, "RightKeypadUp"),
@@ -144,8 +151,7 @@ END_KEY_NAME_TABLES
 BEGIN_KEY_NAME_TABLES(esys_small)
   KEY_NAME_TABLE(switch1),
   KEY_NAME_TABLE(switch2),
-  KEY_NAME_TABLE(joystick1),
-  KEY_NAME_TABLE(joystick2),
+  KEY_NAME_TABLE(joysticks),
   KEY_NAME_TABLE(keyboard),
   KEY_NAME_TABLE(routing),
 END_KEY_NAME_TABLES
@@ -155,8 +161,7 @@ BEGIN_KEY_NAME_TABLES(esys_medium)
   KEY_NAME_TABLE(switch2),
   KEY_NAME_TABLE(switch3),
   KEY_NAME_TABLE(switch4),
-  KEY_NAME_TABLE(joystick1),
-  KEY_NAME_TABLE(joystick2),
+  KEY_NAME_TABLE(joysticks),
   KEY_NAME_TABLE(keyboard),
   KEY_NAME_TABLE(routing),
 END_KEY_NAME_TABLES
@@ -168,30 +173,27 @@ BEGIN_KEY_NAME_TABLES(esys_large)
   KEY_NAME_TABLE(switch4),
   KEY_NAME_TABLE(switch5),
   KEY_NAME_TABLE(switch6),
-  KEY_NAME_TABLE(joystick1),
-  KEY_NAME_TABLE(joystick2),
+  KEY_NAME_TABLE(joysticks),
   KEY_NAME_TABLE(keyboard),
   KEY_NAME_TABLE(routing),
 END_KEY_NAME_TABLES
 
 BEGIN_KEY_NAME_TABLES(esytime)
-  KEY_NAME_TABLE(joystick1),
-  KEY_NAME_TABLE(joystick2),
+  KEY_NAME_TABLE(joysticks),
   KEY_NAME_TABLE(linear),
   KEY_NAME_TABLE(keyboard),   // For braille keyboard when not in usb-hid mode.
   KEY_NAME_TABLE(routing),
 END_KEY_NAME_TABLES
 
 BEGIN_KEY_NAME_TABLES(bnote)
-  KEY_NAME_TABLE(keypad1),
-  KEY_NAME_TABLE(keypad2),
+  KEY_NAME_TABLE(keypads),
   KEY_NAME_TABLE(keyboard),   // For braille keyboard when not in usb-hid mode.
   KEY_NAME_TABLE(routing),
 END_KEY_NAME_TABLES
 
 BEGIN_KEY_NAME_TABLES(bbook)
-  KEY_NAME_TABLE(keypad1),
-  KEY_NAME_TABLE(keypad2),
+  KEY_NAME_TABLE(joysticks),
+  KEY_NAME_TABLE(navctl),
   KEY_NAME_TABLE(keyboard),   // For braille keyboard when not in usb-hid mode.
   KEY_NAME_TABLE(routing),
 END_KEY_NAME_TABLES
