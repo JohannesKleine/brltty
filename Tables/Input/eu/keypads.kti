@@ -16,7 +16,7 @@
 # This software is maintained by Dave Mielke <dave@mielke.cc>.
 ###############################################################################
 
-note The four round keys to the left and right of the braille cells are the left and right keypads.
+note The keypads are the four small keys (Left, Right, Up, Down) to the left and right of the braille display.
 note Some keys have been reserved for internal use:
 note + LeftKeypadUp: go to the internal menu
 
